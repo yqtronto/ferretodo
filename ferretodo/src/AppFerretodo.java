@@ -4,11 +4,12 @@ import javax.swing.*;
 //import Paneles.PanelEmpleado;
 //import Paneles.PanelInicio;
 import paneles.PanelInicio;
+import paneles.PanelAdmonUsuarios;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.net.PasswordAuthentication;
+// import java.net.PasswordAuthentication;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,6 +28,7 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	ImageIcon icono = new ImageIcon("image//febeca.png"); // El icono debe estar en el directorio raíz con extensión png.
     BarraMenu barraMenu = new BarraMenu();
     BarraHerramienta barraHerramienta = new BarraHerramienta();
+    PanelCentral panelCentral = new PanelCentral();
     PanelSur panelSur = new PanelSur();
     public static PanelInicio panelInicio;
 	
@@ -48,6 +50,7 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	void agregarPaneles() {
 		this.setJMenuBar(barraMenu);
 		this.add(barraHerramienta, BorderLayout.NORTH);
+		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(panelSur, BorderLayout.SOUTH);
 	}
 	
@@ -439,7 +442,8 @@ class PanelCentral extends JPanel{
 	private static final long serialVersionUID = 1L;
 	CardLayout card;
     //PanelEmpleado panelEmpleado; 
-    JPanel panelInicio; 
+    JPanel panelInicio;
+    PanelAdmonUsuarios panelAdmonUsuario;
     //Panel panelProducto;
     //JPanelProducto panelProducto;
     public PanelCentral() {
@@ -449,19 +453,20 @@ class PanelCentral extends JPanel{
         //panelEmpleado = new PanelEmpleado(); 
         //panelInicio = new PanelInicio();
         //panelProducto=new JPanelProducto();
+        panelAdmonUsuario = new PanelAdmonUsuarios();
         
         //Añadiendo paneles al cardLayout
         //card.addLayoutComponent(panelEmpleado, "Empleados");
-        card.addLayoutComponent(panelInicio, "panelInicio");
+        card.addLayoutComponent(panelAdmonUsuario, "panelAdmonUsuario");
         //card.addLayoutComponent(panelProducto, "Producto");
         //setiando cardlayout a jpanel
         this.setLayout(card);
         
         //aÃ±adiendo paneles al Jpanel gracias a q es tipo cardLayout
         //this.add(panelEmpleado);
-        this.add(panelInicio);
+        this.add(panelAdmonUsuario);
         //this.add(panelProducto);
-        card.show(this, "panelInicio");
+        card.show(this, "panelAdmonUsuario");
     }
        
 }

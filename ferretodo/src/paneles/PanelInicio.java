@@ -42,7 +42,7 @@ public class PanelInicio extends JDialog {
 	
 	//public PanelInicio(JFrame marco) {
 	public PanelInicio() {
-		super();
+		//super();
 		//controlMarco = marco;
 		//controlMarco.setTitle("Ingreso");
 //		controlMarco.setIconImage(icono.getImage());
@@ -93,6 +93,9 @@ public class PanelInicio extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				esCorrecto = true;
+				dispose();
+				/*
 				if (Login.authenticate(getUsername(), getPassword())) {
 					JOptionPane.showMessageDialog(PanelInicio.this,
                             "Hola " + getUsername() + "¡ Ha ingresado correctamente !",
@@ -111,6 +114,7 @@ public class PanelInicio extends JDialog {
 					esCorrecto = false;		
 					
 				}
+				*/
 			}
 		});
 		
