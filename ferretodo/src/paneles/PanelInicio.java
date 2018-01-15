@@ -252,7 +252,12 @@ public class PanelInicio extends JDialog {
 					bAceptar.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							// TODO - Boton Ingresar
+							resultado = true;
+							dispose();
+							/*
 							if (Login.autentificar(getUsuario(), getClave())) {
+								
 								JOptionPane.showMessageDialog(PanelInicio.this,
 			                            "Hola " + getUsuario() + "¡ Ha ingresado correctamente !",
 			                            "Ingreso",
@@ -268,6 +273,7 @@ public class PanelInicio extends JDialog {
 								tClave.setText("");
 								resultado = false;		
 							}
+							*/
 						}
 					});
 					getRootPane().setDefaultButton(bAceptar);
