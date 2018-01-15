@@ -1,6 +1,5 @@
 package paneles;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-
 
 public class PanelInicio extends JDialog {
 
@@ -76,7 +74,6 @@ public class PanelInicio extends JDialog {
         setBounds(posX, posY, TAMX, TAMY);
         // ----------------------------------------------------------
 
-        
         
         /*
         setLayout(new BorderLayout());
