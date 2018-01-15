@@ -106,14 +106,14 @@ public class AppFerretodo extends JFrame implements ActionListener {
 		
 		//PanelInicio pi = new PanelInicio();
 		panelInicio = new PanelInicio();
-		panelInicio.setTitle("Ingreso de Sesión");
-		panelInicio.setModal(true);
+		//panelInicio.setTitle("Ingreso de Sesión");
+		//panelInicio.setModal(true);
 		panelInicio.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         Dimension pantalla, cuadro;
         panelInicio.setSize(400, 150);
         pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         cuadro = panelInicio.getSize();
-        panelInicio.setLocation(((pantalla.width - cuadro.width)/2), (pantalla.height - cuadro.height)/2);
+        //panelInicio.setLocation(((pantalla.width - cuadro.width)/2), (pantalla.height - cuadro.height)/2);
         panelInicio.setVisible(true);
 
         /*
@@ -128,7 +128,7 @@ public class AppFerretodo extends JFrame implements ActionListener {
         */
         // panelInicio.setVisible(true);
 
-        if (panelInicio.isSucceeded()) {
+        if (panelInicio.esCorrecto()) {
             //System.out.println("Cargado");
     		AppFerretodo marco = new AppFerretodo();
     		marco.setVisible(true);
