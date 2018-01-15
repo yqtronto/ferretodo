@@ -22,8 +22,10 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	static final private String TITULO = "Ferretodo";
+	private static final String TITULO = "Ferretodo";
+	private static final int TAMX = 800, TAMY = 600;
+	private Dimension pantalla;
+	private int posX, posY;
 	
 	ImageIcon icono = new ImageIcon("image//febeca.png"); // El icono debe estar en el directorio raíz con extensión png.
     BarraMenu barraMenu = new BarraMenu();
@@ -35,9 +37,13 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	public AppFerretodo() {
 		this.setTitle(TITULO);
 		this.setIconImage(icono.getImage());
-		this.setLocation(220,20); // posicion del JFrame en el escritorio.
-		this.setSize(800, 600);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        posX = (int) ((pantalla.width - TAMX)/2);
+        posY = (int) ((pantalla.height - TAMY)/2);
+        setBounds(posX, posY, TAMX, TAMY);
+		//this.setLocation(220,20); // posicion del JFrame en el escritorio.
+		//this.setSize(800, 600);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		this.setLayout(new BorderLayout());
 		this.agregarEventoBarraHerramienta();
@@ -47,14 +53,14 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	}
 	
 	
-	void agregarPaneles() {
+	private void agregarPaneles() {
 		this.setJMenuBar(barraMenu);
 		this.add(barraHerramienta, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(panelSur, BorderLayout.SOUTH);
 	}
 	
-	void agregarEventoBarraHerramienta() {
+	private void agregarEventoBarraHerramienta() {
 		barraHerramienta.bhCliente.addActionListener(this);
 		barraHerramienta.bhEmpleado.addActionListener(this);
 		barraHerramienta.bhFactura.addActionListener(this);
@@ -64,7 +70,7 @@ public class AppFerretodo extends JFrame implements ActionListener {
 		barraHerramienta.bhUsuario.addActionListener(this);
 	}
 	
-	void agregarEventoBarraMenu() {
+	private void agregarEventoBarraMenu() {
 		barraMenu.miAdministrarCargo.addActionListener(this);
 		barraMenu.miCatalogoProducto.addActionListener(this);
 		barraMenu.miCiudad.addActionListener(this);
@@ -91,7 +97,7 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		
+		// XXX - MAIN
 		//Create and set up the window.
         //JFrame frame = new JFrame("Inicio de Sessión");
         //frame.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
@@ -149,7 +155,7 @@ public class AppFerretodo extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// TODO - ActionPerformed - ActionEvent de la barra de herramientas y de menús.
         if (e.getSource() == barraMenu.miGestionEmpleado || e.getSource() == barraHerramienta.bhEmpleado) {
             //jPanelCenterFerretodo.card.show(jPanelCenterFerretodo, "Empleados");
         	JOptionPane.showMessageDialog(null, "Gestion Empleados.");
