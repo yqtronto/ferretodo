@@ -115,10 +115,10 @@ public class AppFerretodo extends JFrame implements ActionListener {
 		//panelInicio.setTitle("Ingreso de Sesión");
 		//panelInicio.setModal(true);
 		panelInicio.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        Dimension pantalla, cuadro;
-        panelInicio.setSize(400, 150);
-        pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-        cuadro = panelInicio.getSize();
+        // Dimension pantalla, cuadro;
+        // panelInicio.setSize(400, 150);
+        //pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        //cuadro = panelInicio.getSize();
         //panelInicio.setLocation(((pantalla.width - cuadro.width)/2), (pantalla.height - cuadro.height)/2);
         panelInicio.setVisible(true);
 
