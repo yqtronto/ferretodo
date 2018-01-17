@@ -1,0 +1,21 @@
+1- Para usarlo debe guardar el archivo ConexionBD.java en el paquete "bd".
+2- Luego en cada clase que vayan a necesitar la base de datos importarla
+Ej: import bd.ConexionBD;
+3- Para hacer consultas hacer lo siguiente: declarar un ResultSet con variable cualquiera, luego crear la sentenecia SQL
+ y llamar la función
+
+// CODIGO PARA CONSULTAR.
+String sql = "SELECT * FROM BANCO";
+ResultSet resultado = ConexionBD.ejecutarConsulta(sql);
+while ( resultado.next() ) {
+	System.out.println("ID: " +  resultado.getInt(1) + " - Denominacion: " + resultado.getString(2));
+}
+ConexionBD.ejecutarLimpieza();
+
+4- Para insertar, modificar, eliminar
+// CODIGO
+String sql = "INSERT INTO BANCO (BANCO_ID, DENOMINACION) VALUES ( 10, 'VENEZOLANA DE CREDITO');
+int resultado = ConexionBD.ejecutarActualizacion(sql);
+ConexionBD.ejecutarLimpieza();
+
+5- Recuerden colocar el ConexionBD.ejecutarLimpieza(); cada vez que terminen de realizar las operaciones.

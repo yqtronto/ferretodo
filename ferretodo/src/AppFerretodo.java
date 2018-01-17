@@ -1,20 +1,46 @@
-import javax.swing.*;
-
-//import Paneles.JPanelProducto;
-//import Paneles.PanelEmpleado;
-//import Paneles.PanelInicio;
-import paneles.PanelInicio;
-import paneles.PanelAdmonUsuarios;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-// import java.net.PasswordAuthentication;
+/**
+ * @author Yhovanny Quintero
+ */
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+// import java.net.PasswordAuthentication;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+
+import formularios.PanelInicioSesion;
+
+import paneles.PanelInicio;
+import paneles.Incentivos;
+import paneles.PanelAdmonCargo;
+import paneles.PanelAdmonCliente;
+import paneles.PanelAdmonEmpleado;
+import paneles.PanelAdmonFactura;
+import paneles.PanelAdmonIncentivos;
+import paneles.PanelAdmonOrdenDePago;
+import paneles.PanelAdmonProducto;
+import paneles.PanelAdmonProveedor;
+import paneles.PanelAdmonSucursal;
+import paneles.PanelAdmonUsuarios;
+import paneles.PanelConsultasVarias;
 
 public class AppFerretodo extends JFrame implements ActionListener {
 
@@ -32,26 +58,32 @@ public class AppFerretodo extends JFrame implements ActionListener {
     BarraHerramienta barraHerramienta = new BarraHerramienta();
     PanelCentral panelCentral = new PanelCentral();
     PanelSur panelSur = new PanelSur();
-    public static PanelInicio panelInicio;
+    public static PanelInicioSesion panelInicioSesion;
 	
 	public AppFerretodo() {
 		this.setTitle(TITULO);
 		this.setIconImage(icono.getImage());
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// Establecemo el tamaño del JFrame y la posicionamos en el centro de la pantalla.
         pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         posX = (int) ((pantalla.width - TAMX)/2);
         posY = (int) ((pantalla.height - TAMY)/2);
         setBounds(posX, posY, TAMX, TAMY);
-		//this.setLocation(220,20); // posicion del JFrame en el escritorio.
-		//this.setSize(800, 600);
 		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		this.setLayout(new BorderLayout());
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e){
+				JFrame salir = new JFrame("Salir");
+				if (JOptionPane.showConfirmDialog(salir, "Realmente desea salir de la aplicación?", TITULO, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
 		this.agregarEventoBarraHerramienta();
 		this.agregarEventoBarraMenu();
 		this.agregarPaneles();
-		//setResizable(false);
+		setResizable(false);
 	}
-	
 	
 	private void agregarPaneles() {
 		this.setJMenuBar(barraMenu);
@@ -97,72 +129,37 @@ public class AppFerretodo extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		// XXX - MAIN
-		//Create and set up the window.
-        //JFrame frame = new JFrame("Inicio de Sessión");
-        //frame.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
-        //frame.setVisible(true);
-        
-		//Create and set up the content pane.
-        //PanelInicio panelInicio = new PanelInicio(frame);
-        // panelInicio = new PanelInicio();
-        // frame.getContentPane().add(panelInicio);
-        //frame.setD
-
-		
-		//PanelInicio pi = new PanelInicio();
-		panelInicio = new PanelInicio();
-		//panelInicio.setTitle("Ingreso de Sesión");
-		//panelInicio.setModal(true);
-		panelInicio.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // Dimension pantalla, cuadro;
-        // panelInicio.setSize(400, 150);
-        //pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-        //cuadro = panelInicio.getSize();
-        //panelInicio.setLocation(((pantalla.width - cuadro.width)/2), (pantalla.height - cuadro.height)/2);
-        panelInicio.setVisible(true);
-
-        /*
-        frame.getContentPane().add(pi);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 150);
-        Dimension pantalla, cuadro;
-        pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-        cuadro = frame.getSize();
-        frame.setLocation(((pantalla.width - cuadro.width)/2), (pantalla.height - cuadro.height)/2);
-        frame.setVisible(true);
-        */
-        // panelInicio.setVisible(true);
-
-        if (panelInicio.esCorrecto()) {
-            //System.out.println("Cargado");
+		// XXX - MODULO MAIN DE LA APLICACION.
+		panelInicioSesion = new PanelInicioSesion();
+		panelInicioSesion.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        panelInicioSesion.setVisible(true);
+        if (panelInicioSesion.esCorrecto()) {
     		AppFerretodo marco = new AppFerretodo();
     		marco.setVisible(true);
         } else {
-        	//System.out.println("Esperando");
+
         }
-        
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //newContentPane.setOpaque(true); //content panes must be opaque
-        //frame.setContentPane(newContentPane);
-        
-        // frame.pack();
-		
-		// AppFerretodo marco = new AppFerretodo();
-		// marco.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO - ActionPerformed - ActionEvent de la barra de herramientas y de menús.
         if (e.getSource() == barraMenu.miGestionEmpleado || e.getSource() == barraHerramienta.bhEmpleado) {
-            //jPanelCenterFerretodo.card.show(jPanelCenterFerretodo, "Empleados");
-        	JOptionPane.showMessageDialog(null, "Gestion Empleados.");
+        	panelCentral.verPanel("panelAdmonEmpleado");
         } else if (e.getSource() == barraMenu.miGestionCliente || e.getSource() == barraHerramienta.bhCliente) {
-        	JOptionPane.showMessageDialog(null, "Gestion Clientes.");        	
+        	panelCentral.verPanel("panelAdmonCliente");
         } else if (e.getSource() == barraMenu.miEmitirFactura || e.getSource() == barraHerramienta.bhFactura) {
-        	JOptionPane.showMessageDialog(null, "Emisión de Facturas.");        	
+        	panelCentral.verPanel("panelAdmonFactura");
+        } else if (e.getSource() == barraMenu.miUsuario || e.getSource() == barraHerramienta.bhUsuario) {
+        	panelCentral.verPanel("panelAdmonUsuario");
+        } else if (e.getSource() == barraMenu.miGestionOrdenPago || e.getSource() == barraHerramienta.bhOrdenPago) {
+        	panelCentral.verPanel("panelAdmonOrdenDePago");
+        } else if (e.getSource() == barraMenu.miCatalogoProducto || e.getSource() == barraHerramienta.bhProducto) {
+        	panelCentral.verPanel("panelAdmonProducto");
+        } else if (e.getSource() == barraMenu.miProveedor || e.getSource() == barraHerramienta.bhProveedor) {
+        	panelCentral.verPanel("panelAdmonProveedor");
+        } else if (e.getSource() == barraMenu.miVenta ) {
+        	panelCentral.verPanel("panelConsultasVarias");
         }
 
         //System.out.println(e.getSource());
@@ -187,10 +184,10 @@ class PanelSur extends JPanel {
     
 }
 
+/**
+ * Clase que permite la generación de la barra de hermientas.  
+ */
 class BarraHerramienta extends JToolBar {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	// Textos Botones de Barra de Herramientas.
 	static final private String HERRAMIENTA_FACTURA = "Facturación";
@@ -293,38 +290,38 @@ class BarraMenu extends JMenuBar {
     
     
     // Declaración e inicialización de los Menús e Items.
-    public JMenu menuVenta = agregarMenu(MENU_VENTA, KeyEvent.VK_V, MENU_VENTA);
-    public JMenuItem miEmitirFactura = agregarMenuItem(MENUITEM_EMITIR_FACTURAS, KeyEvent.VK_E, null, MENUITEM_EMITIR_FACTURAS, "Emisión de las Facturas.");
-    public JMenuItem miGestionFactura = agregarMenuItem(MENUITEM_GESTION_FACTURAS, KeyEvent.VK_G, null, MENUITEM_GESTION_FACTURAS, "Gestión de las Facturas ingresadas.");
-    public JMenuItem miGestionCliente = agregarMenuItem(MENUITEM_GESTION_CLIENTES, KeyEvent.VK_C, null, MENUITEM_GESTION_CLIENTES, "Gestión de las Facturas ingresadas.");
+    public JMenu menuVenta = agregarMenu(MENU_VENTA, KeyEvent.VK_V, null);
+    public JMenuItem miEmitirFactura = agregarMenuItem(MENUITEM_EMITIR_FACTURAS, KeyEvent.VK_E, null, MENUITEM_EMITIR_FACTURAS, null);
+    public JMenuItem miGestionFactura = agregarMenuItem(MENUITEM_GESTION_FACTURAS, KeyEvent.VK_G, null, MENUITEM_GESTION_FACTURAS, null);
+    public JMenuItem miGestionCliente = agregarMenuItem(MENUITEM_GESTION_CLIENTES, KeyEvent.VK_C, null, MENUITEM_GESTION_CLIENTES, null);
     
-    public JMenu menuGestionAdmin = agregarMenu(MENU_GESTION_ADMIN, KeyEvent.VK_G, MENU_GESTION_ADMIN);
-    public JMenuItem miCatalogoProducto = agregarMenuItem(MENUITEM_CATALOGO_PRODUCTO, KeyEvent.VK_C, null, MENUITEM_CATALOGO_PRODUCTO, "Catálogo de Productos.");
-    public JMenuItem miGestionOrdenPago = agregarMenuItem(MENUITEM_GESTION_ORDEN_PAGO, KeyEvent.VK_G, null, MENUITEM_GESTION_ORDEN_PAGO, "Gestión de las Ordenes de Pagos.");
-    public JMenuItem miIncentivoVenta = agregarMenuItem(MENUITEM_INCENTIVOS_VENTAS_EMPLEADOS, KeyEvent.VK_I, null, MENUITEM_INCENTIVOS_VENTAS_EMPLEADOS, "Incentivos por Ventas a los Empleados.");
-    public JMenuItem miProveedor = agregarMenuItem(MENUITEM_PROVEEDORES, KeyEvent.VK_P, null, MENUITEM_PROVEEDORES, "Proveedores.");
-    public JMenuItem miSucursal = agregarMenuItem(MENUITEM_SUCURSALES, KeyEvent.VK_S, null, MENUITEM_SUCURSALES, "Gestión de las Sucursales.");
+    public JMenu menuGestionAdmin = agregarMenu(MENU_GESTION_ADMIN, KeyEvent.VK_G, null);
+    public JMenuItem miCatalogoProducto = agregarMenuItem(MENUITEM_CATALOGO_PRODUCTO, KeyEvent.VK_C, null, MENUITEM_CATALOGO_PRODUCTO, null);
+    public JMenuItem miGestionOrdenPago = agregarMenuItem(MENUITEM_GESTION_ORDEN_PAGO, KeyEvent.VK_G, null, MENUITEM_GESTION_ORDEN_PAGO, null);
+    public JMenuItem miIncentivoVenta = agregarMenuItem(MENUITEM_INCENTIVOS_VENTAS_EMPLEADOS, KeyEvent.VK_I, null, MENUITEM_INCENTIVOS_VENTAS_EMPLEADOS, null);
+    public JMenuItem miProveedor = agregarMenuItem(MENUITEM_PROVEEDORES, KeyEvent.VK_P, null, MENUITEM_PROVEEDORES, null);
+    public JMenuItem miSucursal = agregarMenuItem(MENUITEM_SUCURSALES, KeyEvent.VK_S, null, MENUITEM_SUCURSALES, null);
 
-    public JMenu menuRRHH = agregarMenu(MENU_RRHH,KeyEvent.VK_R, MENU_RRHH); 
-    public JMenuItem miAdministrarCargo = agregarMenuItem(MENUITEM_ADMINISTRACION_CARGOS, KeyEvent.VK_A, null, MENUITEM_ADMINISTRACION_CARGOS, "Gestión de las Facturas ingresadas.");
-    public JMenuItem miGestionEmpleado = agregarMenuItem(MENUITEM_GESTION_EMPLEADOS, KeyEvent.VK_G, null, MENUITEM_GESTION_EMPLEADOS, "Gestión de los Empleados.");
-    public JMenuItem miIncentivoEmpleado = agregarMenuItem(MENUITEM_INCENTIVOS_EMPLEADOS, KeyEvent.VK_I, null, MENUITEM_INCENTIVOS_EMPLEADOS, "Incentivos al Empleado.");
+    public JMenu menuRRHH = agregarMenu(MENU_RRHH,KeyEvent.VK_R, null); 
+    public JMenuItem miAdministrarCargo = agregarMenuItem(MENUITEM_ADMINISTRACION_CARGOS, KeyEvent.VK_A, null, MENUITEM_ADMINISTRACION_CARGOS, null);
+    public JMenuItem miGestionEmpleado = agregarMenuItem(MENUITEM_GESTION_EMPLEADOS, KeyEvent.VK_G, null, MENUITEM_GESTION_EMPLEADOS, null);
+    public JMenuItem miIncentivoEmpleado = agregarMenuItem(MENUITEM_INCENTIVOS_EMPLEADOS, KeyEvent.VK_I, null, MENUITEM_INCENTIVOS_EMPLEADOS, null);
     
-    public JMenu menuConsulta = agregarMenu(MENU_CONSULTA, KeyEvent.VK_C, MENU_CONSULTA ); 
-    public JMenuItem miVenta = agregarMenuItem(MENUITEM_VENTAS, KeyEvent.VK_V, null, MENUITEM_VENTAS, "Ventas.");
+    public JMenu menuConsulta = agregarMenu(MENU_CONSULTA, KeyEvent.VK_C, null ); 
+    public JMenuItem miVenta = agregarMenuItem(MENUITEM_VENTAS, KeyEvent.VK_V, null, MENUITEM_VENTAS, null);
 
-    public JMenu menuAdmin = agregarMenu(MENU_ADMIN, KeyEvent.VK_A, MENU_ADMIN);
-    public JMenuItem miUsuario = agregarMenuItem(MENUITEM_USUARIOS, KeyEvent.VK_U, null, MENUITEM_USUARIOS, "Usuarios.");
-    public JMenuItem miRol = agregarMenuItem(MENUITEM_ROL, KeyEvent.VK_R, null, MENUITEM_ROL, "Roles.");
-    public JMenuItem miModuloSistema = agregarMenuItem(MENUITEM_MODULO_SISTEMA, KeyEvent.VK_M, null, MENUITEM_MODULO_SISTEMA, "Módulos del Sistema.");
-    public JMenuItem miPermisoRol = agregarMenuItem(MENUITEM_PERMISO_ROL, KeyEvent.VK_P, null, MENUITEM_PERMISO_ROL, "Permisología por Roles");
-    public JMenuItem miDepartamento = agregarMenuItem(MENUITEM_DEPARTAMENTO, KeyEvent.VK_D, null, MENUITEM_DEPARTAMENTO, MENUITEM_DEPARTAMENTO);
-    public JMenuItem miCiudad = agregarMenuItem(MENUITEM_CIUDAD, KeyEvent.VK_C, null, MENUITEM_CIUDAD, MENUITEM_CIUDAD);
-    public JMenuItem miEstado = agregarMenuItem(MENUITEM_ESTADO, KeyEvent.VK_E, null, MENUITEM_ESTADO, MENUITEM_ESTADO);
-    public JMenuItem miEntidadBancaria = agregarMenuItem(MENUITEM_ENTIDAD_BANCARIA, KeyEvent.VK_B, null, MENUITEM_ENTIDAD_BANCARIA, MENUITEM_ENTIDAD_BANCARIA);
-    public JMenuItem miFormaPago = agregarMenuItem(MENUITEM_FORMA_PAGO, KeyEvent.VK_F, null, MENUITEM_FORMA_PAGO, MENUITEM_FORMA_PAGO);
-    public JMenuItem miGrupoCargo = agregarMenuItem(MENUITEM_GRUPO_CARGO, KeyEvent.VK_G, null, MENUITEM_GRUPO_CARGO, MENUITEM_GRUPO_CARGO);
-    public JMenuItem miTipoIncentivo = agregarMenuItem(MENUITEM_TIPO_INCENTIVO, KeyEvent.VK_T, null, MENUITEM_TIPO_INCENTIVO, MENUITEM_TIPO_INCENTIVO);
+    public JMenu menuAdmin = agregarMenu(MENU_ADMIN, KeyEvent.VK_A, null);
+    public JMenuItem miUsuario = agregarMenuItem(MENUITEM_USUARIOS, KeyEvent.VK_U, null, MENUITEM_USUARIOS, null);
+    public JMenuItem miRol = agregarMenuItem(MENUITEM_ROL, KeyEvent.VK_R, null, MENUITEM_ROL, null);
+    public JMenuItem miModuloSistema = agregarMenuItem(MENUITEM_MODULO_SISTEMA, KeyEvent.VK_M, null, MENUITEM_MODULO_SISTEMA, null);
+    public JMenuItem miPermisoRol = agregarMenuItem(MENUITEM_PERMISO_ROL, KeyEvent.VK_P, null, MENUITEM_PERMISO_ROL, null);
+    public JMenuItem miDepartamento = agregarMenuItem(MENUITEM_DEPARTAMENTO, KeyEvent.VK_D, null, MENUITEM_DEPARTAMENTO, null);
+    public JMenuItem miCiudad = agregarMenuItem(MENUITEM_CIUDAD, KeyEvent.VK_C, null, MENUITEM_CIUDAD, null);
+    public JMenuItem miEstado = agregarMenuItem(MENUITEM_ESTADO, KeyEvent.VK_E, null, MENUITEM_ESTADO, null);
+    public JMenuItem miEntidadBancaria = agregarMenuItem(MENUITEM_ENTIDAD_BANCARIA, KeyEvent.VK_B, null, MENUITEM_ENTIDAD_BANCARIA, null);
+    public JMenuItem miFormaPago = agregarMenuItem(MENUITEM_FORMA_PAGO, KeyEvent.VK_F, null, MENUITEM_FORMA_PAGO, null);
+    public JMenuItem miGrupoCargo = agregarMenuItem(MENUITEM_GRUPO_CARGO, KeyEvent.VK_G, null, MENUITEM_GRUPO_CARGO, null);
+    public JMenuItem miTipoIncentivo = agregarMenuItem(MENUITEM_TIPO_INCENTIVO, KeyEvent.VK_T, null, MENUITEM_TIPO_INCENTIVO, null);
 
     /**
      * Constructor de la clase BarraMenu e inicializa el menú.
@@ -440,6 +437,8 @@ class BarraMenu extends JMenuBar {
     
 }
 
+// ======================================================================================
+// TODO ===== Este es el panel central de la aplicación donde apareceran todos módulos asignados.
 class PanelCentral extends JPanel{
     
     /**
@@ -447,32 +446,79 @@ class PanelCentral extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	CardLayout card;
-    //PanelEmpleado panelEmpleado; 
-    JPanel panelInicio;
+	
+	Incentivos incentivos;
+	PanelAdmonCargo panelAdmonCargo;
+	PanelAdmonCliente panelAdmonCliente;
+	PanelAdmonEmpleado panelAdmonEmpleado;
+	PanelAdmonFactura panelAdmonFactura;
+	PanelAdmonIncentivos panelAdmonIncentivos;
+	PanelAdmonOrdenDePago panelAdmonOrdenDePago;
+	PanelAdmonProducto panelAdmonProducto;
+	PanelAdmonProveedor panelAdmonProveedor;
+	PanelAdmonSucursal panelAdmonSucursal;
     PanelAdmonUsuarios panelAdmonUsuario;
-    //Panel panelProducto;
-    //JPanelProducto panelProducto;
+    PanelConsultasVarias panelConsultasVarias;
+    PanelInicio panelInicio;
+    
+    // Constructor de la clase.
     public PanelCentral() {
         card = new CardLayout();
         
-        //Creando paneles
-        //panelEmpleado = new PanelEmpleado(); 
-        //panelInicio = new PanelInicio();
-        //panelProducto=new JPanelProducto();
+        // Creando paneles
+        incentivos = new Incentivos();
+        panelAdmonCargo = new PanelAdmonCargo();
+        panelAdmonCliente = new PanelAdmonCliente();
+        panelAdmonEmpleado = new PanelAdmonEmpleado();
+        panelAdmonFactura = new PanelAdmonFactura();
+        panelAdmonIncentivos = new PanelAdmonIncentivos();
+        panelAdmonOrdenDePago = new PanelAdmonOrdenDePago();
+        panelAdmonProducto = new PanelAdmonProducto();
+        panelAdmonProveedor = new PanelAdmonProveedor();
+        panelAdmonSucursal = new PanelAdmonSucursal();
         panelAdmonUsuario = new PanelAdmonUsuarios();
+        panelConsultasVarias = new PanelConsultasVarias();
+        panelInicio = new PanelInicio();
         
         //Añadiendo paneles al cardLayout
-        //card.addLayoutComponent(panelEmpleado, "Empleados");
+        card.addLayoutComponent(incentivos, "incentivos");
+        card.addLayoutComponent(panelAdmonCargo, "panelAdmonCargo");
+        card.addLayoutComponent(panelAdmonCliente, "panelAdmonCliente");
+        card.addLayoutComponent(panelAdmonEmpleado, "panelAdmonEmpleado");
+        card.addLayoutComponent(panelAdmonFactura, "panelAdmonFactura");
+        card.addLayoutComponent(panelAdmonIncentivos, "panelAdmonIncentivos");
+        card.addLayoutComponent(panelAdmonOrdenDePago, "panelAdmonOrdenDePago");
+        card.addLayoutComponent(panelAdmonProducto, "panelAdmonProducto");
+        card.addLayoutComponent(panelAdmonProveedor, "panelAdmonProveedor");
+        card.addLayoutComponent(panelAdmonSucursal, "panelAdmonSucursal");
         card.addLayoutComponent(panelAdmonUsuario, "panelAdmonUsuario");
-        //card.addLayoutComponent(panelProducto, "Producto");
+        card.addLayoutComponent(panelConsultasVarias, "panelConsultasVarias");
+        card.addLayoutComponent(panelInicio, "panelInicio");
+
         //setiando cardlayout a jpanel
         this.setLayout(card);
         
-        //aÃ±adiendo paneles al Jpanel gracias a q es tipo cardLayout
-        //this.add(panelEmpleado);
+        // agregando paneles al CardLayout
+        this.add(incentivos);
+        this.add(panelAdmonCargo);
+        this.add(panelAdmonCliente);
+        this.add(panelAdmonEmpleado);
+        this.add(panelAdmonFactura);
+        this.add(panelAdmonIncentivos);
+        this.add(panelAdmonOrdenDePago);
+        this.add(panelAdmonProducto);
+        this.add(panelAdmonProveedor);
+        this.add(panelAdmonSucursal);
         this.add(panelAdmonUsuario);
-        //this.add(panelProducto);
-        card.show(this, "panelAdmonUsuario");
+        this.add(panelConsultasVarias);
+        this.add(panelInicio);
+        
+        // Indicamos cual va a ser el primer CardLayout a mostrar.
+        card.show(this, "panelInicio");
+    }
+    
+    public void verPanel(String panel) {
+    	card.show(this, panel);
     }
        
 }
